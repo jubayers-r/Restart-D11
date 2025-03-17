@@ -1,5 +1,4 @@
 import img from "../../assets/logo.png";
-import shadow from "../../assets/bg-shadow.png";
 import banner from "../../assets/banner-main.png";
 
 const Header = ({coin, newCoin}) => {
@@ -40,10 +39,9 @@ const Header = ({coin, newCoin}) => {
         </div>
       </div>
       {/* HERO */}
-         <div className=' bg-black rounded-2xl' >
-            <div className="relative w-full">
-               <img src={shadow} className='rounded-2xl w-full'/>
-               <div className='absolute text-center lg:space-y-7 sm:space-y-2.5 mx-auto w-full top-5 md:top-10 2xl:top-25'>
+         <div className='rounded-2xl w-full bg-gradient-to-tr from-[#8189e3] via-black to-[#c8948a] py-10 md:py-20' >
+
+               <div className=' text-center lg:space-y-7 sm:space-y-2.5 mx-auto w-full top-5 md:top-10 2xl:top-25'>
                <img src={banner} className=' mx-auto w-[20%]'/>
                <h1 className=' text-white sm:font-semibold md:text-2xl lg:text-3xl lg:font-bold'>Assemble Your Ultimate Dream 11 Cricket Team</h1>
                <p className=' text-white/70 lg:text-2xl'>Beyond Boundaries Beyond Limits</p>
@@ -51,7 +49,7 @@ const Header = ({coin, newCoin}) => {
                </div>
                </div>
 
-            </div>
+
     </>
   );
 };
