@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Player from "../3.1 Player/Player";
 import Selected from "../3.2 Selected/Selected";
-const PlayersToggle = ({handleDeselected, handleSelected, selected, coin, setCoin}) => {
+const PlayersToggle = ({handleDeselected, handleSelected, selected, coin, setCoin, isSold, setIsSold}) => {
     const [toggle, setToggle] = useState(true);
     const [players, setPlayers] = useState([]);
     useEffect(() => {
@@ -35,7 +35,7 @@ const PlayersToggle = ({handleDeselected, handleSelected, selected, coin, setCoi
         </div>
         <div className="col-span-4">
       <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-6 mt-10">
-      { toggle ?  players.map((player , index) => <Player key ={index} player={player} handleSelected ={handleSelected} coin ={coin} setCoin={setCoin}></Player>) : selected.map((player, index) => <Selected key ={index} selected = {player} handleDeselected = {handleDeselected}></Selected>) }
+      { toggle ?  players.map((player , index) => <Player key ={index} player={player} handleSelected ={handleSelected} coin ={coin} setCoin={setCoin} selected = {selected} isSold = {isSold} setIsSold = {setIsSold}></Player>) : selected.map((player, index) => <Selected key ={index} selected = {player} handleDeselected = {handleDeselected} isSold = {isSold} setIsSold = {setIsSold}></Selected>) }
       </div>
       { !toggle ? <button onClick={() => setToggle(!toggle)} className="my-5 btn bg-[#E7FE29] xl:p-6.5 md:p-4 p-2 ring-1 ring-gray-400 border-white xl:border-8 border-4 rounded-2xl md:font-bold lg:text-xl md:text-lg">Add More Players</button> : "" }
       </div>

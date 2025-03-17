@@ -3,6 +3,7 @@ import { useState } from "react";
 import PlayersToggle from "./components/2. PlayersToggle/PlayersToggle";
 import Footer from "./components/5. Footer/Footer";
 import Newsletter from "./components/4. Newsletter/Newsletter";
+
 function App() {
   // Coin Count
   const [coin, setCoin] = useState(0);
@@ -30,17 +31,22 @@ function App() {
     }
   }
   // deselected players
+  const [isSold, setIsSold] = useState(false);
   const handleDeselected = (player) => {
       let newSelected = selected.filter(deselect=> deselect.id != player.id);
+      const isExist = newSelected.find(select=> select.id == player.id);
       setSelected(newSelected);
-
+      if(isExist) {
+        setIsSold(!isSold);
+      }
     console.log(newSelected);
   }
+
   return (
     <>
     <div className="max-w-11/12 mx-auto">
     <Header coin ={coin} newCoin={newCoin}></Header>
-    <PlayersToggle handleDeselected ={handleDeselected} handleSelected ={handleSelected} selected = {selected} coin={coin} setCoin={setCoin}></PlayersToggle>
+    <PlayersToggle isSold = {isSold} setIsSold ={setIsSold} handleDeselected ={handleDeselected} handleSelected ={handleSelected} selected = {selected} coin={coin} setCoin={setCoin}></PlayersToggle>
     </div>
     <Newsletter></Newsletter>
     <Footer></Footer>

@@ -1,13 +1,64 @@
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+const handleSuccess = () => {
+  toast.success('Player added successfully!', {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+  });
+}
+const handleInsufficientCoins = () => {
+  toast.error('Insufficient coin! Claim more coin.', {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+  });
+}
+const handleSoldMessage = () => {
+  toast.error('You cannot buy the same player twice. Select another player:)', {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+  });
+}
+const handlePlayerFull = () => {
+  toast.error('Already 6 players are selected, you cannot select more than that:(', {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+  });
+}
 
-const Player = ({ player, handleSelected, coin, setCoin }) => {
+
+const Player = ({ player, handleSelected, coin, setCoin, selected, isSold, setIsSold}) => {
   const { name, country, type_of_player, playing_style, price_usd, picture } =
     player;
-    const [isSold, setIsSold] = useState(false);
 
+
+    const isAffordable = (player.price_usd <=  coin);
     const newCoin =() =>{
-      const isAffordable = (player.price_usd <=  coin);
-        if (isAffordable){
+      const isExist = selected.find(select=> select.id == player.id);
+        if (isAffordable && (selected.length < 6 && !isExist)  ){
           setCoin(coin - price_usd)
         }
     }
@@ -55,11 +106,17 @@ const Player = ({ player, handleSelected, coin, setCoin }) => {
           <div className="flex justify-between place-items-center">
             <h1 className="font-semibold">Price: {price_usd}</h1>
             <button
-              onClick={combination}
+              onClick={() => {
+                combination();
+                setTimeout(() => { isAffordable ? (!isSold ? ( (selected.length < 6) ? `${handleSuccess()}` : `${handlePlayerFull()}`) : `${handleSoldMessage()}`) :`${handleInsufficientCoins()}`
+                    // Calling handleSuccess after combination runs
+                }, 0); // Ensure handleSuccess runs asynchronously after combination
+              }}
               className="btn bg-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
             Choose Player
             </button>
+            <ToastContainer />
           </div>
         </div>
       </div>

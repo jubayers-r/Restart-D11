@@ -1,6 +1,7 @@
-const Selected = ({selected, handleDeselected}) => {
+const Selected = ({selected, handleDeselected , isSold, setIsSold}) => {
     const {id, name, type_of_player, picture} = selected;
     return (
+        
         <>
         <div className="col-span-3">
             <div className="flex justify-between p-6 bg-gray-200 rounded-2xl w-full place-items-center">
@@ -18,7 +19,7 @@ const Selected = ({selected, handleDeselected}) => {
             </div>
             </div>
         </div>
-        
+
         </>
     );
 };
